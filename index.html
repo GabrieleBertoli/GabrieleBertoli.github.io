@@ -448,7 +448,6 @@
               <div>Now</div><div>University of Florence (Researcher)</div>
               <div>Now</div><div>ESA Φ-lab (Visiting Researcher)</div>
               <div>Focus</div><div>Flood risk • Forecasting • EO/AI</div>
-              <div>Base</div><div>Florence / Frascati, Italy</div>
             </div>
           </div>
 
@@ -593,7 +592,7 @@
         <div class="grid-2">
           <div class="item">
             <h3>Visiting Researcher</h3>
-            <div class="meta">ESA Φ-lab • Jan 2026 – Present • Frascati, Italy</div>
+            <div class="meta">ESA Φ-lab</div>
             <ul>
               <li>Earth observation, SAR-based hydrometric measurements.</li>
               <li>Generative AI for Earth System Science; SWOT-related work.</li>
@@ -602,7 +601,7 @@
 
           <div class="item">
             <h3>Researcher</h3>
-            <div class="meta">University of Florence • Nov 2025 – Present • Florence, Italy</div>
+            <div class="meta">University of Florence</div>
             <ul>
               <li>AI methods + ecosystem services for sustainable water-resources management.</li>
               <li>Hydraulic risk mitigation and decision-support workflows.</li>
@@ -611,7 +610,7 @@
 
           <div class="item">
             <h3>PhD (joint programme + visits)</h3>
-            <div class="meta">University of Florence & TU Braunschweig & Imperial • Nov 2022 – Oct 2025</div>
+            <div class="meta">University of Florence & TU Braunschweig & Imperial</div>
             <ul>
               <li>Thesis: <em>Flood Risk: An Interdisciplinary Approach Integrating Hydrology and Data Science</em>.</li>
               <li>ML + variational DA for discharge forecasting; EnvXflood framework.</li>
@@ -620,7 +619,7 @@
 
           <div class="item">
             <h3>Research Fellow</h3>
-            <div class="meta">University of Florence • Jun 2022 – Nov 2022</div>
+            <div class="meta">University of Florence</div>
             <ul>
               <li>Flood risk of critical facilities (health, education).</li>
             </ul>
@@ -633,7 +632,7 @@
             <div class="item">
               <h3>Collaborations</h3>
               <ul>
-                <li><strong>PRIN 2022 CASTLE</strong>: small agricultural reservoirs mapping/quantification.</li>
+                <li><strong>PRIN CASTLE</strong>: small agricultural reservoirs mapping/quantification.</li>
                 <li><strong>PRIMA AG-WaMED</strong>: non-conventional waters and participatory governance.</li>
                 <li><strong>PRIMA NEXUS-NESS</strong>: WEFE Nexus decision-support and knowledge integration.</li>
               </ul>
@@ -656,7 +655,6 @@
         <div class="grid-2">
           <div class="item">
             <h3>Workshops (University of Florence)</h3>
-            <div class="meta">2024–2025</div>
             <ul>
               <li>HEC-RAS modelling of Nature-Based Solutions (hands-on).</li>
               <li>HEC-RAS & HEC-HMS hydraulic/hydrological modelling (hands-on).</li>
@@ -666,11 +664,10 @@
 
           <div class="item">
             <h3>Supervision & outreach</h3>
-            <div class="meta">2022–ongoing</div>
             <ul>
-              <li>Supervised 1 M.Sc. thesis and 1 B.Sc. thesis (2024–2025).</li>
+              <li>Supervised 1 M.Sc. thesis and 1 B.Sc. thesis.</li>
               <li>Public engagement on geo-hydrological risks (talks/workshops).</li>
-              <li>Seminar lecturer: flood risk of critical facilities (Politecnico di Milano, 2023–2024).</li>
+              <li>Seminar lecturer: flood risk of critical facilities (Politecnico di Milano).</li>
             </ul>
           </div>
         </div>
@@ -684,7 +681,6 @@
         </p>
 
         <div class="contact-row" aria-label="Contact links">
-          <span class="contact-chip">📍 Florence / Frascati (Italy)</span>
           <a class="contact-chip" href="mailto:gabriele.bertoli@unifi.it" id="emailLink">✉️ gabriele.bertoli@unifi.it</a>
           <a class="contact-chip" href="https://orcid.org/0000-0001-8686-5563" target="_blank" rel="noopener">ORCID</a>
           <a class="contact-chip" href="https://scholar.google.com/citations?user=20dxJREAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">Google Scholar</a>
@@ -703,7 +699,7 @@
       </section>
 
       <footer class="container" aria-label="Footer">
-        © <span id="year"></span> Gabriele Bertoli. Built as a lightweight, single-file portfolio template.
+        Gabriele Bertoli. Built as a lightweight, single-file portfolio template.
       </footer>
     </div>
   </main>
@@ -712,9 +708,6 @@
 
   <script>
     (function () {
-      const year = document.getElementById("year");
-      if (year) year.textContent = new Date().getFullYear();
-
       // Copy email
       const copyBtn = document.getElementById("copyEmail");
       const email = "gabriele.bertoli@unifi.it";
@@ -835,7 +828,7 @@
 
             const meta = document.createElement("div");
             meta.className = "meta";
-            meta.textContent = [pub.venue, pub.type, pub.year || ""].filter(Boolean).join(" • ") || "ORCID";
+            meta.textContent = [pub.venue, pub.type].filter(Boolean).join(" • ") || "ORCID";
 
             const p = document.createElement("p");
             p.textContent = "Source: ORCID public record";
