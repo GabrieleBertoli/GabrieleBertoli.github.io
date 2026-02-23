@@ -405,10 +405,6 @@
       </nav>
 
       <div class="header-actions">
-        <!-- Put a compiled PDF at assets/cv.pdf (optional) -->
-        <a class="btn btn-primary" href="assets/cv.pdf" target="_blank" rel="noopener">
-          Download CV
-        </a>
         <button class="btn" type="button" id="copyEmail" aria-label="Copy email to clipboard">
           Copy email
         </button>
@@ -529,52 +525,18 @@
       <section class="card" id="publications">
         <h2>Selected publications</h2>
 
-        <div class="grid-2">
+        <div class="grid-2" id="publicationsList" aria-live="polite">
           <article class="item">
-            <h3>Latent 3D-Var DA with CAE + LSTM for flood forecasting</h3>
-            <div class="meta">ICCS 2025 (LNCS 15910) • 2025 • Co-first author</div>
-            <p>
-              Latent three-dimensional variational data assimilation using convolutional autoencoders and LSTM surrogates.
-            </p>
-            <a href="https://doi.org/10.1007/978-3-031-97567-7_4" target="_blank" rel="noopener">doi:10.1007/978-3-031-97567-7_4</a>
-          </article>
-
-          <article class="item">
-            <h3>Latent 4D-Var for river discharge forecasting</h3>
-            <div class="meta">IEEE JSTARS • 2025</div>
-            <p>
-              AI-empowered latent four-dimensional variational DA for discharge prediction.
-            </p>
-            <a href="https://doi.org/10.1109/JSTARS.2025.3611136" target="_blank" rel="noopener">doi:10.1109/JSTARS.2025.3611136</a>
-          </article>
-
-          <article class="item">
-            <h3>Flood exposure of environmental assets</h3>
-            <div class="meta">NHESS • 2025</div>
-            <p>
-              Framework and application for assessing flood exposure of environmental assets.
-            </p>
-            <a href="https://doi.org/10.5194/nhess-25-565-2025" target="_blank" rel="noopener">doi:10.5194/nhess-25-565-2025</a>
-          </article>
-
-          <article class="item">
-            <h3>Hybrid ML for improved short-term peak-flow forecasting</h3>
-            <div class="meta">arXiv preprint • 2026</div>
-            <p>
-              Hybrid ML framework for short-term peak-flow forecasting (revised version in preparation for journal submission).
-            </p>
-            <a href="https://arxiv.org/abs/2601.09336" target="_blank" rel="noopener">arXiv:2601.09336</a>
+            <h3>Loading latest publications…</h3>
+            <p class="meta">Fetching the most recent public works from ORCID.</p>
           </article>
         </div>
 
-        <details style="margin-top:14px;">
-          <summary>More talks & conference items</summary>
-          <ul style="margin-top:10px;">
-            <li>EGU 2025: watershed similarities via ML & descriptors — <a href="https://doi.org/10.5194/egusphere-egu25-17403" target="_blank" rel="noopener">doi:10.5194/egusphere-egu25-17403</a></li>
-            <li>EWRA 2025: Flood Exposure of Environmental Assets in Tuscany (accepted; proceedings)</li>
-            <li>EGU 2023: flood risk assessment of educational & health critical facilities — <a href="https://doi.org/10.5194/egusphere-egu23-5616" target="_blank" rel="noopener">doi:10.5194/egusphere-egu23-5616</a></li>
-          </ul>
-        </details>
+        <p style="margin-top:14px;">
+          <a href="https://orcid.org/0000-0001-8686-5563" target="_blank" rel="noopener">
+            View full publication list on ORCID
+          </a>
+        </p>
       </section>
 
       <!-- PROJECTS -->
@@ -756,6 +718,8 @@
       // Copy email
       const copyBtn = document.getElementById("copyEmail");
       const email = "gabriele.bertoli@unifi.it";
+      const orcidId = "0000-0001-8686-5563";
+      const orcidProfileUrl = "https://orcid.org/" + orcidId;
       if (copyBtn) {
         copyBtn.addEventListener("click", async () => {
           try {
@@ -768,6 +732,133 @@
           }
         });
       }
+
+      // Latest ORCID publications (public works; falls back to profile link)
+      const publicationsList = document.getElementById("publicationsList");
+      const renderPublicationsFallback = (message) => {
+        if (!publicationsList) return;
+        publicationsList.innerHTML = "";
+        const article = document.createElement("article");
+        article.className = "item";
+
+        const h3 = document.createElement("h3");
+        h3.textContent = "Latest publications unavailable";
+
+        const p = document.createElement("p");
+        p.className = "meta";
+        p.textContent = message;
+
+        const a = document.createElement("a");
+        a.href = orcidProfileUrl;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = "Open ORCID profile";
+
+        article.appendChild(h3);
+        article.appendChild(p);
+        article.appendChild(a);
+        publicationsList.appendChild(article);
+      };
+
+      const parseOrcidYear = (summary) => {
+        const y = summary && summary["publication-date"] && summary["publication-date"].year && summary["publication-date"].year.value;
+        const m = summary && summary["publication-date"] && summary["publication-date"].month && summary["publication-date"].month.value;
+        const d = summary && summary["publication-date"] && summary["publication-date"].day && summary["publication-date"].day.value;
+        return {
+          year: Number.parseInt(y || "", 10) || 0,
+          month: Number.parseInt(m || "", 10) || 0,
+          day: Number.parseInt(d || "", 10) || 0
+        };
+      };
+
+      const findBestOrcidLink = (summary) => {
+        const ids = (summary && summary["external-ids"] && summary["external-ids"]["external-id"]) || [];
+        const doi = ids.find((id) => (id["external-id-type"] || "").toLowerCase() === "doi");
+        const doiValue = doi && doi["external-id-value"];
+        if (doiValue) return "https://doi.org/" + String(doiValue).trim();
+
+        const urlId = ids.find((id) => (id["external-id-type"] || "").toLowerCase() === "url");
+        const urlValue = urlId && urlId["external-id-value"];
+        if (urlValue) return String(urlValue).trim();
+
+        return orcidProfileUrl;
+      };
+
+      const loadOrcidPublications = async () => {
+        if (!publicationsList) return;
+
+        try {
+          const res = await fetch("https://pub.orcid.org/v3.0/" + orcidId + "/works", {
+            headers: { "Accept": "application/json" }
+          });
+          if (!res.ok) throw new Error("HTTP " + res.status);
+
+          const data = await res.json();
+          const groups = Array.isArray(data && data.group) ? data.group : [];
+
+          const pubs = groups.map((group) => {
+            const summaries = Array.isArray(group && group["work-summary"]) ? group["work-summary"] : [];
+            if (!summaries.length) return null;
+            const summary = summaries[0];
+            const pubDate = parseOrcidYear(summary);
+            const title = (((summary || {}).title || {}).title || {}).value || "";
+            const journal = ((summary || {})["journal-title"] || {}).value || "";
+            const type = (summary && summary.type) || "";
+            return {
+              title: String(title).trim(),
+              venue: String(journal).trim(),
+              type: String(type).trim(),
+              url: findBestOrcidLink(summary),
+              year: pubDate.year,
+              month: pubDate.month,
+              day: pubDate.day
+            };
+          }).filter((p) => p && p.title);
+
+          if (!pubs.length) throw new Error("No publications parsed");
+
+          pubs.sort((a, b) =>
+            (b.year - a.year) ||
+            (b.month - a.month) ||
+            (b.day - a.day) ||
+            a.title.localeCompare(b.title)
+          );
+          const latest = pubs.slice(0, 4);
+
+          publicationsList.innerHTML = "";
+          latest.forEach((pub) => {
+            const article = document.createElement("article");
+            article.className = "item";
+
+            const h3 = document.createElement("h3");
+            h3.textContent = pub.title;
+
+            const meta = document.createElement("div");
+            meta.className = "meta";
+            meta.textContent = [pub.venue, pub.type, pub.year || ""].filter(Boolean).join(" • ") || "ORCID";
+
+            const p = document.createElement("p");
+            p.textContent = "Source: ORCID public record";
+
+            const a = document.createElement("a");
+            a.href = pub.url;
+            a.target = "_blank";
+            a.rel = "noopener";
+            a.textContent = pub.url.includes("doi.org/") ? "Open DOI" : "Open publication";
+
+            article.appendChild(h3);
+            article.appendChild(meta);
+            article.appendChild(p);
+            article.appendChild(a);
+            publicationsList.appendChild(article);
+          });
+        } catch (err) {
+          renderPublicationsFallback("Automatic ORCID loading is unavailable in this browser/session.");
+          console.warn("ORCID publications load failed:", err);
+        }
+      };
+
+      loadOrcidPublications();
 
       // Scroll-to-top button
       const toTop = document.getElementById("toTop");
