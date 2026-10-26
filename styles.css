@@ -68,6 +68,7 @@ strong { font-weight: 600; }
 .header-inner { min-height: 86px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
 .brand { color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 .brand-mark { display: grid; place-items: center; width: 32px; height: 32px; color: var(--accent); }
+.brand-mark svg { width: 100%; height: auto; }
 .brand-title { display: flex; flex-direction: column; line-height: 1.3; }
 .brand-title strong { font-weight: 500; font-size: 1.0625rem; letter-spacing: -.02em; }
 .brand-title span { color: var(--muted); font-size: .8125rem; margin-top: 3px; }
