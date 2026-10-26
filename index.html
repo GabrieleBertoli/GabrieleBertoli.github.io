@@ -1,894 +1,775 @@
 <!DOCTYPE html>
-<html lang="en" id="top">
-<head>
-  <meta charset="UTF-8" />
-  <title>Gabriele Bertoli – Research Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Gabriele Bertoli — flood risk, hydrological forecasting, data assimilation, and AI for water resources." />
-
-  <style>
-    :root{
-      --bg0:#040b1a;
-      --bg1:#0a1b3f;
-      --bg2:#15366d;
-
-      --text:#eaf2ff;
-      --muted:#b3c2da;
-      --muted2:#7f94b5;
-
-      --card:rgba(12, 28, 64, 0.58);
-      --border:rgba(144, 180, 255, 0.14);
-      --shadow: 0 12px 40px rgba(2, 8, 24, 0.45);
-
-      --accent:#7dd3fc;
-      --accent-weak:rgba(125, 211, 252, 0.16);
-      --accent-border:rgba(125, 211, 252, 0.34);
-
-      --radius:16px;
-      --radius-sm:12px;
-
-      --max: 1020px;
-    }
-
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, var(--bg2) 0%, var(--bg1) 60%, var(--bg0) 100%);
-      color:var(--text);
-      min-height:100vh;
-      line-height:1.55;
-    }
-
-    a{ color:var(--accent); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-    code, kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-
-    .skip-link{
-      position:absolute;
-      left:-9999px;
-      top:auto;
-      width:1px;
-      height:1px;
-      overflow:hidden;
-    }
-    .skip-link:focus{
-      left:16px;
-      top:16px;
-      width:auto;
-      height:auto;
-      padding:10px 12px;
-      border-radius:10px;
-      background:rgba(8, 23, 56, 0.92);
-      border:1px solid var(--border);
-      z-index:9999;
-    }
-
-    .container{
-      width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    /* Header / nav */
-    .site-header{
-      position: sticky;
-      top:0;
-      z-index:1000;
-      backdrop-filter: blur(12px);
-      background: rgba(8, 23, 56, 0.62);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .header-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      padding: 14px 0;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width: 200px;
-    }
-    .brand-mark{
-      width:34px;
-      height:34px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      background: var(--accent-weak);
-      border:1px solid var(--accent-border);
-      box-shadow: 0 0 18px rgba(125, 211, 252, 0.22);
-      flex: 0 0 auto;
-    }
-    .brand-title{
-      display:flex;
-      flex-direction:column;
-      line-height:1.2;
-    }
-    .brand-title strong{ font-size:0.98rem; }
-    .brand-title span{ font-size:0.82rem; color:var(--muted); }
-
-    nav{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px 14px;
-      align-items:center;
-      justify-content:center;
-    }
-    .nav-link{
-      color: var(--muted);
-      font-size: 0.92rem;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      text-decoration:none;
-    }
-    .nav-link:hover{
-      color: var(--text);
-      border-color: rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-      text-decoration:none;
-    }
-    .nav-link[aria-current="page"]{
-      color: var(--accent);
-      background: var(--accent-weak);
-      border-color: var(--accent-border);
-    }
-
-    .header-actions{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      min-width: 200px;
-      justify-content:flex-end;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.10);
-      color: var(--text);
-      text-decoration:none;
-      font-size: 0.92rem;
-      cursor:pointer;
-      white-space:nowrap;
-    }
-    .btn:hover{
-      background: rgba(255,255,255,0.06);
-      text-decoration:none;
-    }
-    .btn-primary{
-      background: var(--accent-weak);
-      border-color: var(--accent-border);
-      color: var(--accent);
-    }
-    .btn-primary:hover{ filter: brightness(1.05); }
-
-    /* Layout */
-    main{ padding: 26px 0 44px; }
-    .stack{ display:flex; flex-direction:column; gap:18px; }
-
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-
-    .hero{
-      padding: 26px;
-      display:grid;
-      grid-template-columns: 1.3fr 0.7fr;
-      gap: 18px;
-      align-items: start;
-    }
-    .hero h1{
-      margin:0 0 8px;
-      font-size: clamp(1.7rem, 2.4vw, 2.35rem);
-      letter-spacing: 0.2px;
-    }
-    .hero .subtitle{
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 1.02rem;
-    }
-
-    .status{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: var(--accent-weak);
-      border: 1px solid var(--accent-border);
-      color: var(--accent);
-      font-size: 0.9rem;
-      margin-bottom: 12px;
-      width: fit-content;
-    }
-    .dot{
-      width: 10px; height: 10px;
-      background: var(--accent);
-      border-radius: 999px;
-      box-shadow: 0 0 10px rgba(125, 211, 252, 0.68);
-    }
-
-    .pill-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 12px;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.035);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .side{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .mini-card{
-      background: rgba(9, 24, 58, 0.34);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: var(--radius-sm);
-      padding: 14px;
-    }
-    .mini-card h3{
-      margin: 0 0 8px;
-      font-size: 0.98rem;
-      color: var(--accent);
-      letter-spacing: 0.2px;
-    }
-    .kv{
-      display:grid;
-      grid-template-columns: 110px 1fr;
-      gap: 8px 10px;
-      font-size: 0.92rem;
-    }
-    .kv div:nth-child(odd){ color: var(--muted); }
-    .kv div:nth-child(even){ color: var(--text); }
-
-    h2{
-      margin: 0 0 12px;
-      font-size: 1.25rem;
-      color: var(--accent);
-      letter-spacing: 0.2px;
-    }
-    p{ margin: 0 0 10px; color: var(--muted); }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .grid-3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .item{
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-sm);
-      padding: 14px;
-    }
-    .item h3{
-      margin:0 0 6px;
-      font-size: 1.02rem;
-      color: var(--text);
-    }
-    .meta{
-      font-size: 0.9rem;
-      color: var(--muted2);
-      margin-bottom: 10px;
-    }
-    .item ul{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-    }
-    .item li{ margin: 6px 0; }
-
-    details{
-      border-radius: var(--radius-sm);
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.07);
-      padding: 12px 14px;
-    }
-    details summary{
-      cursor: pointer;
-      color: var(--text);
-      font-weight: 600;
-      list-style: none;
-    }
-    details summary::-webkit-details-marker{ display:none; }
-    details p, details li{ color: var(--muted); }
-    details[open]{ background: rgba(255,255,255,0.03); }
-
-    .contact-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 10px;
-    }
-    .contact-chip{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.09);
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    footer{
-      padding: 22px 0 40px;
-      color: var(--muted2);
-      font-size: 0.9rem;
-    }
-
-    /* Scroll-to-top */
-    #toTop{
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      display:none;
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(8, 23, 56, 0.62);
-      backdrop-filter: blur(10px);
-      color: var(--text);
-      cursor:pointer;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.45);
-    }
-    #toTop:hover{ filter: brightness(1.08); }
-
-    /* Responsive */
-    @media (max-width: 900px){
-      .hero{ grid-template-columns: 1fr; }
-      .brand{ min-width: unset; }
-      .header-actions{ min-width: unset; }
-      .grid-3{ grid-template-columns: 1fr; }
-      .grid-2{ grid-template-columns: 1fr; }
-      nav{ display:none; } /* compact header on mobile */
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      html{ scroll-behavior:auto; }
-    }
-  </style>
-</head>
-
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="Go to top">
-        <span class="brand-mark" aria-hidden="true">◆</span>
-        <span class="brand-title">
-          <strong>Gabriele Bertoli</strong>
-          <span>Flood risk • AI & data assimilation • EO</span>
-        </span>
-      </a>
-
-      <nav aria-label="Primary">
-        <a class="nav-link" href="#about">About</a>
-        <a class="nav-link" href="#research">Research</a>
-        <a class="nav-link" href="#publications">Publications</a>
-        <a class="nav-link" href="#projects">Projects</a>
-        <a class="nav-link" href="#experience">Experience</a>
-        <a class="nav-link" href="#teaching">Teaching</a>
-        <a class="nav-link" href="#contact">Contact</a>
-      </nav>
-
-      <div class="header-actions">
-        <button class="btn" type="button" id="copyEmail" aria-label="Copy email to clipboard">
-          Copy email
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="container" id="main">
-    <div class="stack">
-      <!-- HERO -->
-      <section class="card hero" aria-label="Intro">
-        <div>
-          <div class="status"><span class="dot" aria-hidden="true"></span> Research Portfolio</div>
-          <h1>Hydrological forecasting, flood risk, and AI-enabled data assimilation.</h1>
-          <p class="subtitle">
-            Researcher at the University of Florence and Visiting Researcher at ESA’s Φ-lab (SWOT).
-            I work on uncertainty-aware flood forecasting, hybrid ML + variational DA (3D-Var/4D-Var),
-            and emerging social-sensing workflows for rapid impact mapping.
-          </p>
-
-          <div class="pill-row" aria-label="Key areas">
-            <span class="pill">Flood forecasting (discharge/peaks)</span>
-            <span class="pill">3D-Var / 4D-Var in latent space</span>
-            <span class="pill">LSTM • XGBoost • Random Forest</span>
-            <span class="pill">Convolutional Autoencoders</span>
-            <span class="pill">Ecosystem services & exposure</span>
-            <span class="pill">LLM-based social sensing</span>
-          </div>
-
-          <div class="contact-row" style="margin-top:14px;">
-            <a class="btn" href="#publications">Selected papers</a>
-            <a class="btn" href="#projects">Featured work</a>
-            <a class="btn" href="#contact">Get in touch</a>
-          </div>
-        </div>
-
-        <aside class="side" aria-label="Quick info">
-          <div class="mini-card">
-            <h3>Affiliations</h3>
-            <div class="kv">
-              <div>Now</div><div>University of Florence (Researcher)</div>
-              <div>Now</div><div>ESA Φ-lab (Visiting Researcher)</div>
-              <div>Focus</div><div>Flood risk • Forecasting • EO/AI</div>
-            </div>
-          </div>
-
-          <div class="mini-card">
-            <h3>Profiles</h3>
-            <div class="pill-row" style="margin:0;">
-              <a class="pill" href="https://orcid.org/0000-0001-8686-5563" target="_blank" rel="noopener">ORCID</a>
-              <a class="pill" href="https://scholar.google.com/citations?user=20dxJREAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">Google Scholar</a>
-              <a class="pill" href="https://github.com/GabrieleBertoli" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <!-- ABOUT -->
-      <section class="card" id="about">
-        <h2>About</h2>
-        <p>
-          PhD researcher (thesis submitted; viva pending) in Civil and Environmental Engineering (joint programme:
-          University of Florence and TU Braunschweig) with a focus on flood risk, hydrological forecasting, and
-          AI-enabled data assimilation. My work integrates machine learning with variational DA and representation
-          learning to improve discharge forecasts across diverse catchments (e.g., EFAS and LamaH-CE).
-        </p>
-
-        <details>
-          <summary>Research profile (expanded)</summary>
-          <p style="margin-top:10px;">
-            I developed latent-space 3D-Var/4D-Var approaches using convolutional autoencoders and LSTM surrogates,
-            and worked on environmental flood exposure (EnvXflood) combining ecosystem-service thinking with
-            participatory valuation. I am also developing an LLM-based “social sensing” workflow to extract flood
-            location and extent from social media, with multimodal extensions (image/video) for rapid impact mapping.
-          </p>
-        </details>
-      </section>
-
-      <!-- RESEARCH -->
-      <section class="card" id="research">
-        <h2>Research interests</h2>
-
-        <div class="grid-3">
-          <div class="item">
-            <h3>Keywords</h3>
-            <ul>
-              <li>Flood forecasting; hydro-meteorological extremes; early warning systems</li>
-              <li>Flood and multi-hazard risk; uncertainty-aware modelling</li>
-              <li>Environmental exposure; ecosystem services; participatory valuation</li>
-              <li>Social sensing; multimodal flood mapping; LLM-based information extraction</li>
-            </ul>
-          </div>
-
-          <div class="item">
-            <h3>Methods</h3>
-            <ul>
-              <li>Variational DA: 3D-Var / 4D-Var</li>
-              <li>Latent-space modelling: convolutional autoencoders</li>
-              <li>Deep learning: LSTM; hybrid ML (XGBoost/RF)</li>
-              <li>Probabilistic evaluation for extremes; explainable ML</li>
-            </ul>
-          </div>
-
-          <div class="item">
-            <h3>Applications</h3>
-            <ul>
-              <li>EFAS; LamaH-CE; multi-scale discharge forecasting</li>
-              <li>Peak-flow forecasting and extremes evaluation</li>
-              <li>Flood exposure assessment (incl. environmental assets)</li>
-              <li>Rapid mapping from text/image/video observations</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- PUBLICATIONS -->
-      <section class="card" id="publications">
-        <h2>Selected publications</h2>
-
-        <div class="grid-2" id="publicationsList" aria-live="polite">
-          <article class="item">
-            <h3>Loading latest publications…</h3>
-            <p class="meta">Fetching the most recent public works from ORCID.</p>
-          </article>
-        </div>
-
-        <p style="margin-top:14px;">
-          <a href="https://orcid.org/0000-0001-8686-5563" target="_blank" rel="noopener">
-            View full publication list on ORCID
-          </a>
-        </p>
-      </section>
-
-      <!-- PROJECTS -->
-      <section class="card" id="projects">
-        <h2>Projects & research outputs</h2>
-
-        <div class="grid-2">
-          <article class="item">
-            <h3>EnvXflood</h3>
-            <div class="meta">Environmental flood exposure framework</div>
-            <ul>
-              <li>Ecosystem-services framing + participatory valuation for environmental assets.</li>
-              <li>Case studies and qualitative exposure attributes for environmental typologies.</li>
-              <li>Open GIS dataset (Tuscany): <a href="https://doi.org/10.17632/55phb4xw5k.1" target="_blank" rel="noopener">doi:10.17632/55phb4xw5k.1</a></li>
-            </ul>
-          </article>
-
-          <article class="item">
-            <h3>Latent-space DA for discharge forecasting</h3>
-            <div class="meta">CAE + LSTM surrogates • 3D-Var/4D-Var</div>
-            <ul>
-              <li>Representation learning to reduce DA computational cost.</li>
-              <li>Multi-catchment evaluation (e.g., EFAS / LamaH-CE style settings).</li>
-              <li>Focus on accuracy gains and scalable workflows.</li>
-            </ul>
-          </article>
-
-          <article class="item">
-            <h3>LLM-based social sensing for floods</h3>
-            <div class="meta">Information extraction • rapid mapping</div>
-            <ul>
-              <li>Extract flood location/extent from social media text.</li>
-              <li>Planned multimodal extension (image/video) for impact mapping.</li>
-              <li>Designed for rapid, uncertainty-aware situational awareness.</li>
-            </ul>
-          </article>
-
-          <article class="item">
-            <h3>CASTLE – WebGIS & open data (in preparation)</h3>
-            <div class="meta">Project manager (WebGIS & Open Data)</div>
-            <ul>
-              <li>Platform requirements, metadata specification, QA/QC and delivery validation.</li>
-              <li>Supports reservoir mapping and water-management decision workflows.</li>
-              <li>Project site: <a href="https://sites.google.com/view/castleita/home-page" target="_blank" rel="noopener">CASTLE</a></li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <!-- EXPERIENCE -->
-      <section class="card" id="experience">
-        <h2>Experience</h2>
-
-        <div class="grid-2">
-          <div class="item">
-            <h3>Visiting Researcher</h3>
-            <div class="meta">ESA Φ-lab</div>
-            <ul>
-              <li>Earth observation, SAR-based hydrometric measurements.</li>
-              <li>Generative AI for Earth System Science; SWOT-related work.</li>
-            </ul>
-          </div>
-
-          <div class="item">
-            <h3>Researcher</h3>
-            <div class="meta">University of Florence</div>
-            <ul>
-              <li>AI methods + ecosystem services for sustainable water-resources management.</li>
-              <li>Hydraulic risk mitigation and decision-support workflows.</li>
-            </ul>
-          </div>
-
-          <div class="item">
-            <h3>PhD (joint programme + visits)</h3>
-            <div class="meta">University of Florence & TU Braunschweig & Imperial</div>
-            <ul>
-              <li>Thesis: <em>Flood Risk: An Interdisciplinary Approach Integrating Hydrology and Data Science</em>.</li>
-              <li>ML + variational DA for discharge forecasting; EnvXflood framework.</li>
-            </ul>
-          </div>
-
-          <div class="item">
-            <h3>Research Fellow</h3>
-            <div class="meta">University of Florence</div>
-            <ul>
-              <li>Flood risk of critical facilities (health, education).</li>
-            </ul>
-          </div>
-        </div>
-
-        <details style="margin-top:14px;">
-          <summary>Collaborations & service</summary>
-          <div class="grid-2" style="margin-top:12px;">
-            <div class="item">
-              <h3>Collaborations</h3>
-              <ul>
-                <li><strong>PRIN CASTLE</strong>: small agricultural reservoirs mapping/quantification.</li>
-                <li><strong>PRIMA AG-WaMED</strong>: non-conventional waters and participatory governance.</li>
-                <li><strong>PRIMA NEXUS-NESS</strong>: WEFE Nexus decision-support and knowledge integration.</li>
-              </ul>
-            </div>
-            <div class="item">
-              <h3>Academic service</h3>
-              <ul>
-                <li>Peer review: <em>Nature Water</em>; <em>LNCS</em> (Springer).</li>
-                <li>Organising: BIP “Green and Carbon-Neutral Cities” (EUniWell Arena 3), University of Florence.</li>
-              </ul>
-            </div>
-          </div>
-        </details>
-      </section>
-
-      <!-- TEACHING -->
-      <section class="card" id="teaching">
-        <h2>Teaching & supervision</h2>
-
-        <div class="grid-2">
-          <div class="item">
-            <h3>Workshops (University of Florence)</h3>
-            <ul>
-              <li>HEC-RAS modelling of Nature-Based Solutions (hands-on).</li>
-              <li>HEC-RAS & HEC-HMS hydraulic/hydrological modelling (hands-on).</li>
-              <li>Materials preparation, dataset setup, live demos, in-class support.</li>
-            </ul>
-          </div>
-
-          <div class="item">
-            <h3>Supervision & outreach</h3>
-            <ul>
-              <li>Supervised 1 M.Sc. thesis and 1 B.Sc. thesis.</li>
-              <li>Public engagement on geo-hydrological risks (talks/workshops).</li>
-              <li>Seminar lecturer: flood risk of critical facilities (Politecnico di Milano).</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section class="card" id="contact">
-        <h2>Contact</h2>
-        <p>
-          For collaborations, speaking invitations, or project inquiries, email is the fastest channel.
-        </p>
-
-        <div class="contact-row" aria-label="Contact links">
-          <a class="contact-chip" href="mailto:gabriele.bertoli@unifi.it" id="emailLink">✉️ gabriele.bertoli@unifi.it</a>
-          <a class="contact-chip" href="https://orcid.org/0000-0001-8686-5563" target="_blank" rel="noopener">ORCID</a>
-          <a class="contact-chip" href="https://scholar.google.com/citations?user=20dxJREAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">Google Scholar</a>
-          <a class="contact-chip" href="https://github.com/GabrieleBertoli" target="_blank" rel="noopener">GitHub</a>
-        </div>
-
-        <details style="margin-top:14px;">
-          <summary>Technical skills (high level)</summary>
-          <ul style="margin-top:10px;">
-            <li>AI/Data Science: Python, ML, explainable AI, data assimilation.</li>
-            <li>LLMs (local inference): Ollama; Docker (containerised deployments).</li>
-            <li>DevOps/Compute: Linux, server management, Git/GitHub, Colab.</li>
-            <li>Geospatial: GIS, WebGIS. Web/Markup: HTML, website administration.</li>
-          </ul>
-        </details>
-      </section>
-
-      <footer class="container" aria-label="Footer">
-        Gabriele Bertoli. Built as a lightweight, single-file portfolio template.
-      </footer>
-    </div>
-  </main>
-
-  <button id="toTop" type="button" aria-label="Scroll to top">↑</button>
-
+<html id="top" lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   Gabriele Bertoli – AI for Water Science
+  </title>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="Gabriele Bertoli — AI, large language models (LLMs), machine learning (ML), and data assimilation (DA) for water science at Imperial College London." name="description"/>
+  <meta content="#071321" name="theme-color"/>
+  <link href="styles.css" rel="stylesheet"/>
   <script>
-    (function () {
-      // Copy email
-      const copyBtn = document.getElementById("copyEmail");
-      const email = "gabriele.bertoli@unifi.it";
-      const orcidId = "0000-0001-8686-5563";
-      const orcidProfileUrl = "https://orcid.org/" + orcidId;
-      if (copyBtn) {
-        copyBtn.addEventListener("click", async () => {
-          try {
-            await navigator.clipboard.writeText(email);
-            copyBtn.textContent = "Copied";
-            setTimeout(() => (copyBtn.textContent = "Copy email"), 1200);
-          } catch {
-            // Fallback
-            window.location.href = "mailto:" + email;
-          }
-        });
-      }
-
-      // Latest ORCID publications (public works; falls back to profile link)
-      const publicationsList = document.getElementById("publicationsList");
-      const renderPublicationsFallback = (message) => {
-        if (!publicationsList) return;
-        publicationsList.innerHTML = "";
-        const article = document.createElement("article");
-        article.className = "item";
-
-        const h3 = document.createElement("h3");
-        h3.textContent = "Latest publications unavailable";
-
-        const p = document.createElement("p");
-        p.className = "meta";
-        p.textContent = message;
-
-        const a = document.createElement("a");
-        a.href = orcidProfileUrl;
-        a.target = "_blank";
-        a.rel = "noopener";
-        a.textContent = "Open ORCID profile";
-
-        article.appendChild(h3);
-        article.appendChild(p);
-        article.appendChild(a);
-        publicationsList.appendChild(article);
-      };
-
-      const parseOrcidYear = (summary) => {
-        const y = summary && summary["publication-date"] && summary["publication-date"].year && summary["publication-date"].year.value;
-        const m = summary && summary["publication-date"] && summary["publication-date"].month && summary["publication-date"].month.value;
-        const d = summary && summary["publication-date"] && summary["publication-date"].day && summary["publication-date"].day.value;
-        return {
-          year: Number.parseInt(y || "", 10) || 0,
-          month: Number.parseInt(m || "", 10) || 0,
-          day: Number.parseInt(d || "", 10) || 0
-        };
-      };
-
-      const findBestOrcidLink = (summary) => {
-        const ids = (summary && summary["external-ids"] && summary["external-ids"]["external-id"]) || [];
-        const doi = ids.find((id) => (id["external-id-type"] || "").toLowerCase() === "doi");
-        const doiValue = doi && doi["external-id-value"];
-        if (doiValue) return "https://doi.org/" + String(doiValue).trim();
-
-        const urlId = ids.find((id) => (id["external-id-type"] || "").toLowerCase() === "url");
-        const urlValue = urlId && urlId["external-id-value"];
-        if (urlValue) return String(urlValue).trim();
-
-        return orcidProfileUrl;
-      };
-
-      const loadOrcidPublications = async () => {
-        if (!publicationsList) return;
-
-        try {
-          const res = await fetch("https://pub.orcid.org/v3.0/" + orcidId + "/works", {
-            headers: { "Accept": "application/json" }
-          });
-          if (!res.ok) throw new Error("HTTP " + res.status);
-
-          const data = await res.json();
-          const groups = Array.isArray(data && data.group) ? data.group : [];
-
-          const pubs = groups.map((group) => {
-            const summaries = Array.isArray(group && group["work-summary"]) ? group["work-summary"] : [];
-            if (!summaries.length) return null;
-            const summary = summaries[0];
-            const pubDate = parseOrcidYear(summary);
-            const title = (((summary || {}).title || {}).title || {}).value || "";
-            const journal = ((summary || {})["journal-title"] || {}).value || "";
-            const type = (summary && summary.type) || "";
-            return {
-              title: String(title).trim(),
-              venue: String(journal).trim(),
-              type: String(type).trim(),
-              url: findBestOrcidLink(summary),
-              year: pubDate.year,
-              month: pubDate.month,
-              day: pubDate.day
-            };
-          }).filter((p) => p && p.title);
-
-          if (!pubs.length) throw new Error("No publications parsed");
-
-          pubs.sort((a, b) =>
-            (b.year - a.year) ||
-            (b.month - a.month) ||
-            (b.day - a.day) ||
-            a.title.localeCompare(b.title)
-          );
-          const latest = pubs.slice(0, 4);
-
-          publicationsList.innerHTML = "";
-          latest.forEach((pub) => {
-            const article = document.createElement("article");
-            article.className = "item";
-
-            const h3 = document.createElement("h3");
-            h3.textContent = pub.title;
-
-            const meta = document.createElement("div");
-            meta.className = "meta";
-            meta.textContent = [pub.venue, pub.type].filter(Boolean).join(" • ") || "ORCID";
-
-            const p = document.createElement("p");
-            p.textContent = "Source: ORCID public record";
-
-            const a = document.createElement("a");
-            a.href = pub.url;
-            a.target = "_blank";
-            a.rel = "noopener";
-            a.textContent = pub.url.includes("doi.org/") ? "Open DOI" : "Open publication";
-
-            article.appendChild(h3);
-            article.appendChild(meta);
-            article.appendChild(p);
-            article.appendChild(a);
-            publicationsList.appendChild(article);
-          });
-        } catch (err) {
-          renderPublicationsFallback("Automatic ORCID loading is unavailable in this browser/session.");
-          console.warn("ORCID publications load failed:", err);
-        }
-      };
-
-      loadOrcidPublications();
-
-      // Scroll-to-top button
-      const toTop = document.getElementById("toTop");
-      const onScroll = () => {
-        if (!toTop) return;
-        toTop.style.display = (window.scrollY > 600) ? "block" : "none";
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
-      onScroll();
-
-      if (toTop) {
-        toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-      }
-
-      // Active section highlighting (desktop nav)
-      const navLinks = Array.from(document.querySelectorAll("nav a.nav-link"));
-      const sections = navLinks
-        .map(a => document.querySelector(a.getAttribute("href")))
-        .filter(Boolean);
-
-      const setActive = (id) => {
-        navLinks.forEach(a => {
-          const match = a.getAttribute("href") === "#" + id;
-          if (match) a.setAttribute("aria-current", "page");
-          else a.removeAttribute("aria-current");
-        });
-      };
-
-      const obs = new IntersectionObserver((entries) => {
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible && visible.target && visible.target.id) setActive(visible.target.id);
-      }, { rootMargin: "-40% 0px -55% 0px", threshold: [0.1, 0.2, 0.35] });
-
-      sections.forEach(sec => obs.observe(sec));
-    })();
+   document.documentElement.classList.add("js");
   </script>
-</body>
+  <script defer="" src="main.js">
+  </script>
+ </head>
+ <body>
+  <a class="skip-link" href="#main">
+   Skip to content
+  </a>
+  <header class="site-header">
+   <div class="container header-inner">
+    <a aria-label="Gabriele Bertoli — home" class="brand" href="#top">
+     <span aria-hidden="true" class="brand-mark">
+      <svg fill="none" height="34" viewBox="0 0 30 34" width="30">
+       <path d="M5 3C5 12 15 10 15 19V31M25 3C25 12 15 10 15 19M15 3V12" stroke="currentColor" stroke-linecap="round" stroke-width="1.6">
+       </path>
+      </svg>
+     </span>
+     <span class="brand-title">
+      <strong>
+       Gabriele Bertoli
+      </strong>
+      <span>
+       AI · LLMs · ML · DA
+      </span>
+     </span>
+    </a>
+    <button aria-controls="primaryNav" aria-expanded="false" class="menu-toggle" id="menuToggle" type="button">
+     <span id="menuLabel">
+      Menu
+     </span>
+     <span aria-hidden="true" class="menu-icon">
+     </span>
+    </button>
+    <nav aria-label="Primary navigation" id="primaryNav">
+     <a class="nav-link" href="#research">
+      Research
+     </a>
+     <a class="nav-link" href="#publications">
+      Publications
+     </a>
+     <a class="nav-link" href="#about">
+      About
+     </a>
+     <a class="nav-link" href="#contact">
+      Contact
+     </a>
+    </nav>
+   </div>
+  </header>
+  <main class="container" id="main" tabindex="-1">
+   <section aria-labelledby="introTitle" class="hero">
+    <div class="hero-copy">
+     <p class="eyebrow">
+      Gabriele Bertoli / Imperial College London
+     </p>
+     <h1 id="introTitle">
+      AI for understanding
+      <span>
+       water systems.
+      </span>
+     </h1>
+     <p class="subtitle">
+      I work on large language models (LLMs), machine learning (ML), and data assimilation (DA) for water science. My current focus is developing LLMs to extract knowledge from interviews, surveys, and local experience.
+     </p>
+     <div class="hero-actions">
+      <a class="btn btn-primary" href="#research">
+       Explore research
+       <span aria-hidden="true">
+        ↗
+       </span>
+      </a>
+      <a class="text-link" href="#contact">
+       Get in touch
+       <span aria-hidden="true">
+        ↗
+       </span>
+      </a>
+     </div>
+    </div>
+    <figure class="research-visual">
+     <div class="visual-topline">
+      <span class="visual-label">
+       From observations to understanding
+      </span>
+      <span aria-hidden="true" class="visual-dot">
+      </span>
+     </div>
+     <svg aria-labelledby="riverTitle riverDescription" class="river-map" fill="none" role="img" viewBox="0 0 440 390">
+      <title id="riverTitle">
+       A connected river catchment
+      </title>
+      <desc id="riverDescription">
+       An illustrative river network, with branching tributaries, terrain contours, and observation points. This is a schematic, not a map or measured data.
+      </desc>
+      <defs>
+       <radialGradient id="terrainFill">
+        <stop stop-color="#204b68" stop-opacity=".35">
+        </stop>
+        <stop offset="1" stop-color="#0b2032" stop-opacity="0">
+        </stop>
+       </radialGradient>
+       <linearGradient gradientUnits="userSpaceOnUse" id="riverColor" x1="90" x2="285" y1="50" y2="350">
+        <stop stop-color="#457b9b">
+        </stop>
+        <stop offset=".55" stop-color="#8bdded">
+        </stop>
+        <stop offset="1" stop-color="#b3e9f2">
+        </stop>
+       </linearGradient>
+       <pattern height="40" id="mapGrid" patternUnits="userSpaceOnUse" width="40">
+        <path d="M40 0H0V40" stroke="#7193ac" stroke-opacity=".1" stroke-width=".6">
+        </path>
+       </pattern>
+      </defs>
+      <rect fill="url(#terrainFill)" height="390" width="440" x="0" y="0">
+      </rect>
+      <rect fill="url(#mapGrid)" height="390" width="440" x="0" y="0">
+      </rect>
+      <g stroke="#52758b" stroke-opacity=".3" stroke-width=".8">
+       <path d="M28 143C11 90 69 27 143 33C186 36 201 16 254 31C309 46 291 72 347 91C402 110 425 166 403 215C383 259 369 282 325 310C292 332 300 366 256 374C204 383 184 341 133 330C77 318 35 302 43 258C51 214 39 175 28 143Z">
+       </path>
+       <path d="M52 144C35 100 85 52 143 57C186 61 208 37 250 54C297 73 293 92 339 113C379 132 401 170 381 210C361 250 351 266 310 294C280 315 280 348 251 351C213 355 188 321 143 309C95 296 60 280 67 246C74 211 62 176 52 144Z">
+       </path>
+       <path d="M78 145C61 106 99 77 146 81C185 85 211 63 247 79C279 93 294 119 329 135C360 150 373 175 356 209C342 238 330 252 296 276C270 295 264 325 243 326C213 328 192 299 153 288C116 277 86 260 91 237C97 209 88 174 78 145Z">
+       </path>
+       <path d="M103 146C91 118 112 101 151 106C184 110 211 88 240 105C267 121 292 142 317 158C340 173 343 188 332 210C320 234 306 240 280 259C257 276 249 303 235 301C212 298 197 278 163 267C136 258 110 246 115 225C120 204 111 170 103 146Z">
+       </path>
+       <path d="M131 148C117 126 140 126 157 130C187 137 213 113 235 130C257 148 280 163 298 178C315 192 314 204 303 218C290 234 279 235 262 249C245 263 239 280 228 277C209 272 199 257 175 246C152 236 136 232 139 213C142 194 145 169 131 148Z">
+       </path>
+      </g>
+      <path d="M81 87C100 115 147 112 159 151C169 184 205 180 212 217C220 248 258 249 250 286C246 311 276 329 282 356" stroke="#8bdded" stroke-linecap="round" stroke-opacity=".09" stroke-width="18">
+      </path>
+      <g stroke="url(#riverColor)" stroke-linecap="round" stroke-linejoin="round">
+       <path d="M81 87C100 115 147 112 159 151C169 184 205 180 212 217C220 248 258 249 250 286C246 311 276 329 282 356" stroke-width="2.8">
+       </path>
+       <path d="M236 62C221 91 243 114 215 143C194 166 208 190 212 217M361 136C332 147 327 173 299 181C267 188 270 222 227 241M111 260C137 242 161 263 182 256C200 250 215 254 241 265" stroke-width="1.8">
+       </path>
+       <path d="M122 53C117 80 133 99 135 119M47 150C82 145 100 172 166 166M298 83C287 106 250 101 235 114M352 251C322 235 292 263 250 281M169 322C186 305 225 320 252 303M194 62C183 90 210 107 215 143" opacity=".8" stroke-width="1.1">
+       </path>
+       <path d="M69 211C99 209 112 232 144 250M304 308C291 291 274 288 250 286M335 101C324 121 319 154 299 181" opacity=".6" stroke-width="1">
+       </path>
+      </g>
+      <g fill="#071321" stroke="#8bdded" stroke-width="1.5">
+       <circle cx="159" cy="151" r="4">
+       </circle>
+       <circle cx="212" cy="217" r="4">
+       </circle>
+       <circle cx="250" cy="286" r="4">
+       </circle>
+      </g>
+      <g stroke="#8bdded" stroke-opacity=".55" stroke-width=".8">
+       <path d="M164 149L185 136H213M216 216L264 208H303M254 286L286 277H333">
+       </path>
+      </g>
+      <g fill="#a7bacb" font-family="ui-monospace, monospace" font-size="8" letter-spacing="1">
+       <text x="188" y="129">
+        OBSERVE
+       </text>
+       <text x="269" y="201">
+        ASSIMILATE
+       </text>
+       <text x="290" y="270">
+        FORECAST
+       </text>
+      </g>
+      <path d="M22 23H34M28 17V29M406 367H418M412 361V373" stroke="#7297af" stroke-opacity=".6">
+      </path>
+     </svg>
+     <figcaption>
+      <span>
+       Connected catchments. Informed forecasts.
+      </span>
+      <span>
+       Conceptual illustration
+      </span>
+     </figcaption>
+    </figure>
+   </section>
+   <div aria-label="Affiliations and academic profiles" class="affiliations">
+    <div class="affiliation">
+     <span>
+      Postdoctoral Research Associate
+     </span>
+     <strong>
+      Imperial College London
+     </strong>
+     <span>
+      Department of Earth Science and Engineering
+     </span>
+    </div>
+    <div class="affiliation">
+     <span>
+      Research programme
+     </span>
+     <strong>
+      <a href="https://www.schmidtsciences.org/view/" rel="noopener" target="_blank">
+       VIEW
+      </a>
+      ·
+      <a href="https://www.schmidtsciences.org/view/#modal-unlocking-local-knowledge-production-for-global-water-reanalysis" rel="noopener" target="_blank">
+       Unlocking
+      </a>
+     </strong>
+     <span>
+      Virtual Institute for Earth’s Water · Schmidt Sciences
+     </span>
+    </div>
+    <div class="profile-links">
+     <a href="https://orcid.org/0000-0001-8686-5563" rel="noopener" target="_blank">
+      ORCID ↗
+     </a>
+     <a href="https://scholar.google.com/citations?user=20dxJREAAAAJ&amp;hl=en&amp;oi=ao" rel="noopener" target="_blank">
+      Scholar ↗
+     </a>
+     <a href="https://github.com/GabrieleBertoli" rel="noopener" target="_blank">
+      GitHub ↗
+     </a>
+    </div>
+   </div>
+   <section aria-labelledby="researchTitle" class="section" id="research">
+    <div class="section-heading">
+     <div>
+      <span class="section-number">
+       01 / Research
+      </span>
+      <h2 id="researchTitle">
+       LLMs, machine learning,
+       <br/>
+       and data assimilation.
+      </h2>
+     </div>
+     <p>
+      AI connects the strands of my research: extracting knowledge with LLMs, learning from environmental data, and combining observations with models. Water systems and flood risk are the application context.
+     </p>
+    </div>
+    <div class="grid-3 research-topics">
+     <article class="item">
+      <h3>
+       LLMs &amp; knowledge
+       <br/>
+       extraction
+      </h3>
+      <p>
+       Developing large language models to extract meaningful information from interviews, surveys, and local experience.
+      </p>
+      <p class="method-note">
+       Information extraction · Unconventional knowledge sources
+      </p>
+     </article>
+     <article class="item">
+      <h3>
+       Machine
+       <br/>
+       learning
+      </h3>
+      <p>
+       Developing machine learning and representation-learning methods for hydrological forecasting, from hybrid tree-based models to recurrent networks and convolutional autoencoders.
+      </p>
+      <p class="method-note">
+       ML · LSTM · XGBoost · Random Forest · Autoencoders
+      </p>
+     </article>
+     <article class="item">
+      <h3>
+       Data
+       <br/>
+       assimilation
+      </h3>
+      <p>
+       Combining observations with forecasting models through variational data assimilation, including latent-space methods that use learned representations and model surrogates.
+      </p>
+      <p class="method-note">
+       DA · 3D-Var / 4D-Var · Latent-space modelling
+      </p>
+     </article>
+    </div>
+   </section>
+   <section aria-labelledby="projectsTitle" class="section" id="projects">
+    <div class="section-heading">
+     <div>
+      <span class="section-number">
+       02 / Projects &amp; outputs
+      </span>
+      <h2 id="projectsTitle">
+       Selected work.
+      </h2>
+     </div>
+     <p>
+      LLM development, machine learning, and data assimilation in practice, alongside research on flood risk and environmental exposure.
+     </p>
+    </div>
+    <div class="grid-2 project-grid">
+     <article class="item current-project">
+      <span class="project-label">
+       01 / Current research · LLMs
+      </span>
+      <h3>
+       Unlocking
+      </h3>
+      <div class="meta">
+       Unlocking Local Knowledge Production for Global Water Reanalysis · VIEW
+      </div>
+      <p>
+       I develop large language models to extract meaningful information from interviews, surveys, and local experience.
+      </p>
+      <p>
+       The wider project connects locally produced knowledge, citizen observations, and monitoring data with global water reanalysis, as part of Schmidt Sciences’ Virtual Institute for Earth’s Water (VIEW).
+      </p>
+      <div class="project-link">
+       <a href="https://www.schmidtsciences.org/view/#modal-unlocking-local-knowledge-production-for-global-water-reanalysis" rel="noopener" target="_blank">
+        Explore Unlocking at Schmidt Sciences ↗
+       </a>
+      </div>
+     </article>
+     <article class="item">
+      <span class="project-label">
+       02 / Machine learning &amp; data assimilation
+      </span>
+      <h3>
+       Latent-space DA for discharge forecasting
+      </h3>
+      <div class="meta">
+       CAE + LSTM surrogates • 3D-Var/4D-Var
+      </div>
+      <ul>
+       <li>
+        Representation learning to reduce DA computational cost.
+       </li>
+       <li>
+        Multi-catchment evaluation (e.g., EFAS / LamaH-CE style settings).
+       </li>
+       <li>
+        Focus on accuracy gains and scalable workflows.
+       </li>
+      </ul>
+     </article>
+     <article class="item">
+      <span class="project-label">
+       03 / LLMs &amp; social sensing
+      </span>
+      <h3>
+       LLM-based social sensing for floods
+      </h3>
+      <div class="meta">
+       Earlier work · Information extraction &amp; rapid mapping
+      </div>
+      <ul>
+       <li>
+        Explored extracting flood location and extent from social media text.
+       </li>
+       <li>
+        Considered multimodal extensions using images and video for impact mapping.
+       </li>
+       <li>
+        Designed for rapid, uncertainty-aware situational awareness.
+       </li>
+      </ul>
+     </article>
+     <article class="item">
+      <span class="project-label">
+       04 / Environmental exposure
+      </span>
+      <h3>
+       EnvXflood
+      </h3>
+      <div class="meta">
+       Environmental flood exposure framework
+      </div>
+      <ul>
+       <li>
+        Ecosystem-services framing + participatory valuation for environmental assets.
+       </li>
+       <li>
+        Case studies and qualitative exposure attributes for environmental typologies.
+       </li>
+      </ul>
+      <div class="project-link">
+       <a href="https://doi.org/10.17632/55phb4xw5k.1" rel="noopener" target="_blank">
+        Explore the Tuscany dataset ↗
+       </a>
+      </div>
+     </article>
+     <article class="item">
+      <span class="project-label">
+       05 / WebGIS &amp; open data
+      </span>
+      <h3>
+       CASTLE
+      </h3>
+      <div class="meta">
+       WebGIS &amp; Open Data · Project manager · In preparation
+      </div>
+      <ul>
+       <li>
+        Platform requirements, metadata specification, QA/QC and delivery validation.
+       </li>
+       <li>
+        Supports reservoir mapping and water-management decision workflows.
+       </li>
+      </ul>
+      <div class="project-link">
+       <a href="https://sites.google.com/view/castleita/home-page" rel="noopener" target="_blank">
+        Visit CASTLE ↗
+       </a>
+      </div>
+     </article>
+    </div>
+   </section>
+   <section aria-labelledby="publicationsTitle" class="section" id="publications">
+    <div class="section-heading">
+     <div>
+      <span class="section-number">
+       03 / Publications
+      </span>
+      <h2 id="publicationsTitle">
+       Recent publications.
+      </h2>
+     </div>
+     <p>
+      The latest public works from my ORCID record. Explore the full list for earlier research.
+     </p>
+    </div>
+    <div aria-live="polite" class="publication-list" id="publicationsList">
+     <article class="publication-fallback">
+      <h3>
+       Explore my publications
+      </h3>
+      <p>
+       Browse papers and research outputs on ORCID or Google Scholar. Recent works appear here when the publication feed is available.
+      </p>
+      <a class="text-link" href="https://orcid.org/0000-0001-8686-5563" rel="noopener" target="_blank">
+       View ORCID record
+       <span aria-hidden="true">
+        ↗
+       </span>
+      </a>
+     </article>
+    </div>
+    <div class="publication-footer">
+     <a class="text-link" href="https://scholar.google.com/citations?user=20dxJREAAAAJ&amp;hl=en&amp;oi=ao" rel="noopener" target="_blank">
+      All publications on Google Scholar
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+     <p id="publicationStatus" role="status">
+      Latest works are loaded from ORCID.
+     </p>
+    </div>
+   </section>
+   <section aria-labelledby="aboutTitle" class="section about-layout" id="about">
+    <div class="section-heading">
+     <div>
+      <span class="section-number">
+       04 / About
+      </span>
+      <h2 id="aboutTitle">
+       A little background.
+      </h2>
+     </div>
+     <img class="profile-photo" src="assets/gabriele-bertoli.jpg" alt="Gabriele Bertoli" width="955" height="879" loading="lazy" decoding="async"/>
+    </div>
+    <div class="about-body">
+     <p>
+      I am a Postdoctoral Research Associate in the Department of Earth Science and Engineering at Imperial College London. My research spans AI, large language models, machine learning, and data assimilation for water science. I currently focus on developing LLMs to extract meaningful information from unconventional knowledge sources, including interviews, surveys, and local experience.
+     </p>
+     <p> I am a member of the <a href="https://www.imperial.ac.uk/earth-science/research/research-groups/datalearning/" rel="noopener" target="_blank">Data Learning group</a>, led by Rossella Arcucci, and the <a href="https://scalable-sciml-lab.org/" rel="noopener" target="_blank">Scalable Scientific Machine Learning Lab</a>, led by Ben Moseley. </p>
+     <p> My work is part of <a href="https://www.schmidtsciences.org/view/#modal-unlocking-local-knowledge-production-for-global-water-reanalysis" rel="noopener" target="_blank">Unlocking Local Knowledge Production for Global Water Reanalysis</a>, a project within Schmidt Sciences’ <a href="https://www.schmidtsciences.org/view/" rel="noopener" target="_blank">Virtual Institute for Earth’s Water (VIEW)</a>. </p>
+     <details>
+      <summary>
+       Research background
+      </summary>
+      <p>
+       My background is in civil and environmental engineering, with research at the University of Florence and TU Braunschweig, and a visiting research appointment at ESA’s Φ-lab. My earlier work includes latent-space 3D-Var and 4D-Var methods using convolutional autoencoders and LSTM surrogates for discharge forecasting across catchments such as EFAS and LamaH-CE. I also developed EnvXflood, combining ecosystem services and participatory valuation to assess environmental flood exposure, and explored social sensing for flood mapping.
+      </p>
+     </details>
+     <div class="about-jump-links">
+      <a class="text-link" href="#experience">
+       Experience
+       <span aria-hidden="true">
+        ↓
+       </span>
+      </a>
+      <a class="text-link" href="#teaching">
+       Teaching &amp; supervision
+       <span aria-hidden="true">
+        ↓
+       </span>
+      </a>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="experienceTitle" class="section" id="experience">
+    <div class="section-heading">
+     <div>
+      <span class="section-number">
+       05 / Experience
+      </span>
+      <h2 id="experienceTitle">
+       Research &amp; collaborations.
+      </h2>
+     </div>
+    </div>
+    <div class="grid-2 experience-grid">
+     <div class="item">
+      <h3>
+       Postdoctoral Research Associate
+      </h3>
+      <div class="meta">
+       Current · Imperial College London · Department of Earth Science and Engineering
+      </div>
+      <ul>
+       <li>
+        Developing LLMs to extract information from interviews, surveys, local experience, and other unconventional knowledge sources.
+       </li>
+       <li>
+        Member of Rossella Arcucci’s Data Learning group and Ben Moseley’s Scalable Scientific Machine Learning Lab.
+       </li>
+       <li>
+        Research within the Unlocking project, part of VIEW.
+       </li>
+      </ul>
+     </div>
+     <div class="item">
+      <h3>
+       Visiting Researcher
+      </h3>
+      <div class="meta">
+       Previous appointment · ESA Φ-lab
+      </div>
+      <ul>
+       <li>
+        Earth observation, SAR-based hydrometric measurements.
+       </li>
+       <li>
+        Generative AI for Earth System Science; SWOT-related work.
+       </li>
+      </ul>
+     </div>
+     <div class="item">
+      <h3>
+       Researcher
+      </h3>
+      <div class="meta">
+       Previous appointment · University of Florence
+      </div>
+      <ul>
+       <li>
+        AI methods + ecosystem services for sustainable water-resources management.
+       </li>
+       <li>
+        Hydraulic risk mitigation and decision-support workflows.
+       </li>
+      </ul>
+     </div>
+     <div class="item">
+      <h3>
+       Doctoral research
+      </h3>
+      <div class="meta">
+       University of Florence &amp; TU Braunschweig · Research visit at Imperial College London
+      </div>
+      <ul>
+       <li>
+        Thesis:
+        <em>
+         Flood Risk: An Interdisciplinary Approach Integrating Hydrology and Data Science
+        </em>
+        .
+       </li>
+       <li>
+        ML + variational DA for discharge forecasting; EnvXflood framework.
+       </li>
+      </ul>
+     </div>
+     <div class="item">
+      <h3>
+       Research Fellow
+      </h3>
+      <div class="meta">
+       Previous appointment · University of Florence
+      </div>
+      <ul>
+       <li>
+        Flood risk of critical facilities (health, education).
+       </li>
+      </ul>
+     </div>
+    </div>
+    <details>
+     <summary>
+      Collaborations &amp; service
+     </summary>
+     <div class="grid-2">
+      <div class="item">
+       <h3>
+        Collaborations
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          PRIN CASTLE
+         </strong>
+         : small agricultural reservoirs mapping/quantification.
+        </li>
+        <li>
+         <strong>
+          PRIMA AG-WaMED
+         </strong>
+         : non-conventional waters and participatory governance.
+        </li>
+        <li>
+         <strong>
+          PRIMA NEXUS-NESS
+         </strong>
+         : WEFE Nexus decision-support and knowledge integration.
+        </li>
+       </ul>
+      </div>
+      <div class="item">
+       <h3>
+        Academic service
+       </h3>
+       <ul>
+        <li>
+         Peer review:
+         <em>
+          Nature Water
+         </em>
+         ;
+         <em>
+          LNCS
+         </em>
+         (Springer).
+        </li>
+        <li>
+         Organising: BIP “Green and Carbon-Neutral Cities” (EUniWell Arena 3), University of Florence.
+        </li>
+       </ul>
+      </div>
+     </div>
+    </details>
+   </section>
+   <section aria-labelledby="teachingTitle" class="section" id="teaching">
+    <div class="section-heading">
+     <div>
+      <span class="section-number">
+       06 / Teaching
+      </span>
+      <h2 id="teachingTitle">
+       Sharing knowledge.
+      </h2>
+     </div>
+    </div>
+    <div class="grid-2 experience-grid">
+     <div class="item">
+      <h3>
+       Workshops (University of Florence)
+      </h3>
+      <ul>
+       <li>
+        HEC-RAS modelling of Nature-Based Solutions (hands-on).
+       </li>
+       <li>
+        HEC-RAS &amp; HEC-HMS hydraulic/hydrological modelling (hands-on).
+       </li>
+       <li>
+        Materials preparation, dataset setup, live demos, in-class support.
+       </li>
+      </ul>
+     </div>
+     <div class="item">
+      <h3>
+       Supervision &amp; outreach
+      </h3>
+      <ul>
+       <li>
+        Supervised 1 M.Sc. thesis and 1 B.Sc. thesis.
+       </li>
+       <li>
+        Public engagement on geo-hydrological risks (talks/workshops).
+       </li>
+       <li>
+        Seminar lecturer: flood risk of critical facilities (Politecnico di Milano).
+       </li>
+      </ul>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="contactTitle" class="section contact-section" id="contact">
+    <div class="section-heading">
+     <div>
+      <span class="section-number">
+       07 / Contact
+      </span>
+      <h2 id="contactTitle">
+       Let’s connect.
+      </h2>
+     </div>
+    </div>
+    <p>
+     For collaborations, speaking invitations, or project inquiries, email is the fastest channel.
+    </p>
+    <div class="contact-row">
+     <a class="contact-email" href="mailto:gbertoli@ic.ac.uk" id="emailLink">
+      gbertoli@ic.ac.uk
+     </a>
+     <button class="btn copy-email" id="copyEmail" type="button">
+      Copy email
+     </button>
+     <span class="sr-only" id="copyStatus" role="status">
+     </span>
+    </div>
+    <div aria-label="Academic and code profiles" class="profile-links">
+     <a href="https://orcid.org/0000-0001-8686-5563" rel="noopener" target="_blank">
+      ORCID ↗
+     </a>
+     <a href="https://scholar.google.com/citations?user=20dxJREAAAAJ&amp;hl=en&amp;oi=ao" rel="noopener" target="_blank">
+      Google Scholar ↗
+     </a>
+     <a href="https://github.com/GabrieleBertoli" rel="noopener" target="_blank">
+      GitHub ↗
+     </a>
+    </div>
+    <details>
+     <summary>
+      Technical skills (high level)
+     </summary>
+     <ul>
+      <li>
+       AI/Data Science: Python, ML, explainable AI, data assimilation.
+      </li>
+      <li>
+       LLMs (local inference): Ollama; Docker (containerised deployments).
+      </li>
+      <li>
+       DevOps/Compute: Linux, server management, Git/GitHub, Colab.
+      </li>
+      <li>
+       Geospatial: GIS, WebGIS. Web/Markup: HTML, website administration.
+      </li>
+     </ul>
+    </details>
+   </section>
+  </main>
+  <footer class="container site-footer">
+   <span>
+    ©
+    <span id="currentYear">
+     2026
+    </span>
+    Gabriele Bertoli
+   </span>
+   <span>
+    AI · LLMs · ML · DA
+   </span>
+   <a href="#top">
+    Back to top ↑
+   </a>
+  </footer>
+ </body>
 </html>
