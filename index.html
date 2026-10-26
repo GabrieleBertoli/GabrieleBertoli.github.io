@@ -7,7 +7,7 @@
   </title>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="Gabriele Bertoli — AI, large language models (LLMs), machine learning (ML), and data assimilation (DA) for water science at Imperial College London." name="description"/>
-  <meta content="#071321" name="theme-color"/>
+  <meta content="#f3f7fb" name="theme-color"/>
   <link href="styles.css" rel="stylesheet"/>
   <script>
    document.documentElement.classList.add("js");
@@ -73,7 +73,7 @@
       </span>
      </h1>
      <p class="subtitle">
-      I work on large language models (LLMs), machine learning (ML), and data assimilation (DA) for water science. My current focus is developing LLMs to extract knowledge from interviews, surveys, and local experience.
+      I work on large language models (LLMs), machine learning (ML), and data assimilation (DA) for water science. My current focus is developing LLMs to extract relevant knowledge from unconventional sources to improve hydrological modelling, hazards forecasting and decision-making.
      </p>
      <div class="hero-actions">
       <a class="btn btn-primary" href="#research">
@@ -89,103 +89,13 @@
        </span>
       </a>
      </div>
+     <p class="hero-collaboration">Research collaboration with <a href="https://philab.esa.int/" target="_blank" rel="noopener">ESA Φ-lab <span aria-hidden="true">↗</span></a> · <a href="https://cin.philab.esa.int/" target="_blank" rel="noopener" aria-label="ESA Φ-lab Collaborative Innovation Network">CIN <span aria-hidden="true">↗</span></a></p>
     </div>
-    <figure class="research-visual">
-     <div class="visual-topline">
-      <span class="visual-label">
-       From observations to understanding
-      </span>
-      <span aria-hidden="true" class="visual-dot">
-      </span>
-     </div>
-     <svg aria-labelledby="riverTitle riverDescription" class="river-map" fill="none" role="img" viewBox="0 0 440 390">
-      <title id="riverTitle">
-       A connected river catchment
-      </title>
-      <desc id="riverDescription">
-       An illustrative river network, with branching tributaries, terrain contours, and observation points. This is a schematic, not a map or measured data.
-      </desc>
-      <defs>
-       <radialGradient id="terrainFill">
-        <stop stop-color="#204b68" stop-opacity=".35">
-        </stop>
-        <stop offset="1" stop-color="#0b2032" stop-opacity="0">
-        </stop>
-       </radialGradient>
-       <linearGradient gradientUnits="userSpaceOnUse" id="riverColor" x1="90" x2="285" y1="50" y2="350">
-        <stop stop-color="#457b9b">
-        </stop>
-        <stop offset=".55" stop-color="#8bdded">
-        </stop>
-        <stop offset="1" stop-color="#b3e9f2">
-        </stop>
-       </linearGradient>
-       <pattern height="40" id="mapGrid" patternUnits="userSpaceOnUse" width="40">
-        <path d="M40 0H0V40" stroke="#7193ac" stroke-opacity=".1" stroke-width=".6">
-        </path>
-       </pattern>
-      </defs>
-      <rect fill="url(#terrainFill)" height="390" width="440" x="0" y="0">
-      </rect>
-      <rect fill="url(#mapGrid)" height="390" width="440" x="0" y="0">
-      </rect>
-      <g stroke="#52758b" stroke-opacity=".3" stroke-width=".8">
-       <path d="M28 143C11 90 69 27 143 33C186 36 201 16 254 31C309 46 291 72 347 91C402 110 425 166 403 215C383 259 369 282 325 310C292 332 300 366 256 374C204 383 184 341 133 330C77 318 35 302 43 258C51 214 39 175 28 143Z">
-       </path>
-       <path d="M52 144C35 100 85 52 143 57C186 61 208 37 250 54C297 73 293 92 339 113C379 132 401 170 381 210C361 250 351 266 310 294C280 315 280 348 251 351C213 355 188 321 143 309C95 296 60 280 67 246C74 211 62 176 52 144Z">
-       </path>
-       <path d="M78 145C61 106 99 77 146 81C185 85 211 63 247 79C279 93 294 119 329 135C360 150 373 175 356 209C342 238 330 252 296 276C270 295 264 325 243 326C213 328 192 299 153 288C116 277 86 260 91 237C97 209 88 174 78 145Z">
-       </path>
-       <path d="M103 146C91 118 112 101 151 106C184 110 211 88 240 105C267 121 292 142 317 158C340 173 343 188 332 210C320 234 306 240 280 259C257 276 249 303 235 301C212 298 197 278 163 267C136 258 110 246 115 225C120 204 111 170 103 146Z">
-       </path>
-       <path d="M131 148C117 126 140 126 157 130C187 137 213 113 235 130C257 148 280 163 298 178C315 192 314 204 303 218C290 234 279 235 262 249C245 263 239 280 228 277C209 272 199 257 175 246C152 236 136 232 139 213C142 194 145 169 131 148Z">
-       </path>
-      </g>
-      <path d="M81 87C100 115 147 112 159 151C169 184 205 180 212 217C220 248 258 249 250 286C246 311 276 329 282 356" stroke="#8bdded" stroke-linecap="round" stroke-opacity=".09" stroke-width="18">
-      </path>
-      <g stroke="url(#riverColor)" stroke-linecap="round" stroke-linejoin="round">
-       <path d="M81 87C100 115 147 112 159 151C169 184 205 180 212 217C220 248 258 249 250 286C246 311 276 329 282 356" stroke-width="2.8">
-       </path>
-       <path d="M236 62C221 91 243 114 215 143C194 166 208 190 212 217M361 136C332 147 327 173 299 181C267 188 270 222 227 241M111 260C137 242 161 263 182 256C200 250 215 254 241 265" stroke-width="1.8">
-       </path>
-       <path d="M122 53C117 80 133 99 135 119M47 150C82 145 100 172 166 166M298 83C287 106 250 101 235 114M352 251C322 235 292 263 250 281M169 322C186 305 225 320 252 303M194 62C183 90 210 107 215 143" opacity=".8" stroke-width="1.1">
-       </path>
-       <path d="M69 211C99 209 112 232 144 250M304 308C291 291 274 288 250 286M335 101C324 121 319 154 299 181" opacity=".6" stroke-width="1">
-       </path>
-      </g>
-      <g fill="#071321" stroke="#8bdded" stroke-width="1.5">
-       <circle cx="159" cy="151" r="4">
-       </circle>
-       <circle cx="212" cy="217" r="4">
-       </circle>
-       <circle cx="250" cy="286" r="4">
-       </circle>
-      </g>
-      <g stroke="#8bdded" stroke-opacity=".55" stroke-width=".8">
-       <path d="M164 149L185 136H213M216 216L264 208H303M254 286L286 277H333">
-       </path>
-      </g>
-      <g fill="#a7bacb" font-family="ui-monospace, monospace" font-size="8" letter-spacing="1">
-       <text x="188" y="129">
-        OBSERVE
-       </text>
-       <text x="269" y="201">
-        ASSIMILATE
-       </text>
-       <text x="290" y="270">
-        FORECAST
-       </text>
-      </g>
-      <path d="M22 23H34M28 17V29M406 367H418M412 361V373" stroke="#7297af" stroke-opacity=".6">
-      </path>
-     </svg>
+    <figure class="hero-portrait">
+     <img class="profile-photo" src="assets/gabriele-bertoli.jpg" alt="Gabriele Bertoli" width="955" height="879" fetchpriority="high" decoding="async"/>
      <figcaption>
-      <span>
-       Connected catchments. Informed forecasts.
-      </span>
-      <span>
-       Conceptual illustration
-      </span>
+      <strong>Gabriele Bertoli</strong>
+      <span>Postdoctoral Research Associate<br/>Imperial College London</span>
      </figcaption>
     </figure>
    </section>
@@ -228,6 +138,22 @@
      <a href="https://github.com/GabrieleBertoli" rel="noopener" target="_blank">
       GitHub ↗
      </a>
+    </div>
+   </div>
+   <div class="research-groups" aria-label="Research groups and collaborations">
+    <p>Research groups &amp; collaborations</p>
+    <a href="https://www.imperial.ac.uk/earth-science/research/research-groups/datalearning/" target="_blank" rel="noopener">
+     <span class="group-name">Data Learning group <span aria-hidden="true">↗</span></span>
+     <span class="group-lead">Rossella Arcucci</span>
+    </a>
+    <a href="https://scalable-sciml-lab.org/" target="_blank" rel="noopener">
+     <span class="group-name">Scalable Scientific Machine Learning Lab <span aria-hidden="true">↗</span></span>
+     <span class="group-lead">Ben Moseley</span>
+    </a>
+    <div class="collaboration-group">
+     <a class="group-name" href="https://philab.esa.int/" target="_blank" rel="noopener">ESA Φ-lab <span aria-hidden="true">↗</span></a>
+     <span class="group-lead">Research collaboration · Earth observation &amp; AI</span>
+     <a class="group-network" href="https://cin.philab.esa.int/" target="_blank" rel="noopener">Collaborative Innovation Network (CIN) <span aria-hidden="true">↗</span></a>
     </div>
    </div>
    <section aria-labelledby="researchTitle" class="section" id="research">
@@ -471,13 +397,111 @@
        A little background.
       </h2>
      </div>
-     <img class="profile-photo" src="assets/gabriele-bertoli.jpg" alt="Gabriele Bertoli" width="955" height="879" loading="lazy" decoding="async"/>
+     <figure class="research-visual">
+      <div class="visual-topline">
+       <span class="visual-label">
+        From observations to understanding
+       </span>
+       <span aria-hidden="true" class="visual-dot">
+       </span>
+      </div>
+      <svg aria-labelledby="riverTitle riverDescription" class="river-map" fill="none" role="img" viewBox="0 0 440 390">
+       <title id="riverTitle">
+        A connected river catchment
+       </title>
+       <desc id="riverDescription">
+        An illustrative river network, with branching tributaries, terrain contours, and observation points. This is a schematic, not a map or measured data.
+       </desc>
+       <defs>
+        <radialGradient id="terrainFill">
+         <stop stop-color="#bfd9ec" stop-opacity=".35">
+         </stop>
+         <stop offset="1" stop-color="#f3f7fb" stop-opacity="0">
+         </stop>
+        </radialGradient>
+        <linearGradient gradientUnits="userSpaceOnUse" id="riverColor" x1="90" x2="285" y1="50" y2="350">
+         <stop stop-color="#2e628d">
+         </stop>
+         <stop offset=".55" stop-color="#2878ae">
+         </stop>
+         <stop offset="1" stop-color="#14549f">
+         </stop>
+        </linearGradient>
+        <pattern height="40" id="mapGrid" patternUnits="userSpaceOnUse" width="40">
+         <path d="M40 0H0V40" stroke="#7193ac" stroke-opacity=".1" stroke-width=".6">
+         </path>
+        </pattern>
+       </defs>
+       <rect fill="url(#terrainFill)" height="390" width="440" x="0" y="0">
+       </rect>
+       <rect fill="url(#mapGrid)" height="390" width="440" x="0" y="0">
+       </rect>
+       <g stroke="#608bab" stroke-opacity=".3" stroke-width=".8">
+        <path d="M28 143C11 90 69 27 143 33C186 36 201 16 254 31C309 46 291 72 347 91C402 110 425 166 403 215C383 259 369 282 325 310C292 332 300 366 256 374C204 383 184 341 133 330C77 318 35 302 43 258C51 214 39 175 28 143Z">
+        </path>
+        <path d="M52 144C35 100 85 52 143 57C186 61 208 37 250 54C297 73 293 92 339 113C379 132 401 170 381 210C361 250 351 266 310 294C280 315 280 348 251 351C213 355 188 321 143 309C95 296 60 280 67 246C74 211 62 176 52 144Z">
+        </path>
+        <path d="M78 145C61 106 99 77 146 81C185 85 211 63 247 79C279 93 294 119 329 135C360 150 373 175 356 209C342 238 330 252 296 276C270 295 264 325 243 326C213 328 192 299 153 288C116 277 86 260 91 237C97 209 88 174 78 145Z">
+        </path>
+        <path d="M103 146C91 118 112 101 151 106C184 110 211 88 240 105C267 121 292 142 317 158C340 173 343 188 332 210C320 234 306 240 280 259C257 276 249 303 235 301C212 298 197 278 163 267C136 258 110 246 115 225C120 204 111 170 103 146Z">
+        </path>
+        <path d="M131 148C117 126 140 126 157 130C187 137 213 113 235 130C257 148 280 163 298 178C315 192 314 204 303 218C290 234 279 235 262 249C245 263 239 280 228 277C209 272 199 257 175 246C152 236 136 232 139 213C142 194 145 169 131 148Z">
+        </path>
+       </g>
+       <path d="M81 87C100 115 147 112 159 151C169 184 205 180 212 217C220 248 258 249 250 286C246 311 276 329 282 356" stroke="#2878ae" stroke-linecap="round" stroke-opacity=".09" stroke-width="18">
+       </path>
+       <g stroke="url(#riverColor)" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M81 87C100 115 147 112 159 151C169 184 205 180 212 217C220 248 258 249 250 286C246 311 276 329 282 356" stroke-width="2.8">
+        </path>
+        <path d="M236 62C221 91 243 114 215 143C194 166 208 190 212 217M361 136C332 147 327 173 299 181C267 188 270 222 227 241M111 260C137 242 161 263 182 256C200 250 215 254 241 265" stroke-width="1.8">
+        </path>
+        <path d="M122 53C117 80 133 99 135 119M47 150C82 145 100 172 166 166M298 83C287 106 250 101 235 114M352 251C322 235 292 263 250 281M169 322C186 305 225 320 252 303M194 62C183 90 210 107 215 143" opacity=".8" stroke-width="1.1">
+        </path>
+        <path d="M69 211C99 209 112 232 144 250M304 308C291 291 274 288 250 286M335 101C324 121 319 154 299 181" opacity=".6" stroke-width="1">
+        </path>
+       </g>
+       <g fill="#f3f7fb" stroke="#235bc4" stroke-width="1.5">
+        <circle cx="159" cy="151" r="4">
+        </circle>
+        <circle cx="212" cy="217" r="4">
+        </circle>
+        <circle cx="250" cy="286" r="4">
+        </circle>
+       </g>
+       <g stroke="#2878ae" stroke-opacity=".55" stroke-width=".8">
+        <path d="M164 149L185 136H213M216 216L264 208H303M254 286L286 277H333">
+        </path>
+       </g>
+       <g fill="#375976" font-family="ui-monospace, monospace" font-size="12" letter-spacing=".5">
+        <text x="188" y="129">
+         OBSERVE
+        </text>
+        <text x="269" y="201">
+         ASSIMILATE
+        </text>
+        <text x="290" y="270">
+         FORECAST
+        </text>
+       </g>
+       <path d="M22 23H34M28 17V29M406 367H418M412 361V373" stroke="#7297af" stroke-opacity=".6">
+       </path>
+      </svg>
+      <figcaption>
+       <span>
+        Connected catchments. Informed forecasts.
+       </span>
+       <span>
+        Conceptual illustration
+       </span>
+      </figcaption>
+     </figure>
     </div>
     <div class="about-body">
      <p>
       I am a Postdoctoral Research Associate in the Department of Earth Science and Engineering at Imperial College London. My research spans AI, large language models, machine learning, and data assimilation for water science. I currently focus on developing LLMs to extract meaningful information from unconventional knowledge sources, including interviews, surveys, and local experience.
      </p>
      <p> I am a member of the <a href="https://www.imperial.ac.uk/earth-science/research/research-groups/datalearning/" rel="noopener" target="_blank">Data Learning group</a>, led by Rossella Arcucci, and the <a href="https://scalable-sciml-lab.org/" rel="noopener" target="_blank">Scalable Scientific Machine Learning Lab</a>, led by Ben Moseley. </p>
+     <p>My collaboration with <a href="https://philab.esa.int/" target="_blank" rel="noopener">ESA’s Φ-lab</a> connects generative AI, Earth observation, and water science. This builds on a visiting research appointment involving SAR-based hydrometric measurements and SWOT-related work.</p>
      <p> My work is part of <a href="https://www.schmidtsciences.org/view/#modal-unlocking-local-knowledge-production-for-global-water-reanalysis" rel="noopener" target="_blank">Unlocking Local Knowledge Production for Global Water Reanalysis</a>, a project within Schmidt Sciences’ <a href="https://www.schmidtsciences.org/view/" rel="noopener" target="_blank">Virtual Institute for Earth’s Water (VIEW)</a>. </p>
      <details>
       <summary>
@@ -536,10 +560,10 @@
      </div>
      <div class="item">
       <h3>
-       Visiting Researcher
+       ESA Φ-lab collaboration
       </h3>
       <div class="meta">
-       Previous appointment · ESA Φ-lab
+       Visiting Researcher · Previous appointment
       </div>
       <ul>
        <li>
@@ -712,7 +736,7 @@
      </div>
     </div>
     <p>
-     For collaborations, speaking invitations, or project inquiries, email is the fastest channel.
+     For catching up, email is the fastest channel.
     </p>
     <div class="contact-row">
      <a class="contact-email" href="mailto:gbertoli@ic.ac.uk" id="emailLink">
